@@ -1,0 +1,128 @@
+.footer-section {
+  width: 100%;
+  background-color: #0b0f19; /* Vahi deep dark background */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 6rem;
+  overflow: hidden;
+}
+
+/* --- THE EXACT DEEP PURPLE GRADIENT BACKDROP --- */
+.footer-gradient-overlay {
+  position: absolute;
+  bottom: 45px; /* Base strip ke theek upar tak */
+  left: 0;
+  width: 100%;
+  height: 220px; /* Purplish glow height range */
+  background: linear-gradient(to top, rgba(88, 28, 135, 0.55), rgba(88, 28, 135, 0.2), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* --- QUOTE STYLE --- */
+.footer-quote {
+  font-family: 'Courier New', Courier, monospace;
+  color: #94a3b8;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+/* --- FUNCTION CTA COLOR --- */
+.footer-cta {
+  font-family: 'Courier New', Courier, monospace;
+  color: #c084fc; /* Gorgeous neon purple color tone matching screenshot */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+}
+
+/* --- ROUNDED SOCIAL ICONS --- */
+.footer-socials {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.social-circle-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Pure white subtle borders */
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.social-circle-btn:hover {
+  background: #ffffff;
+  color: #0b0f19; /* Invert color scheme on hover action */
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* --- AVATAR LAYOUT AT THE BOTTOM TUCKED IN --- */
+.footer-avatar-box {
+  width: 160px;
+  height: auto;
+  margin-bottom: -5px; /* Base bar se perfect match blend karne ke liye */
+  display: flex;
+  justify-content: center;
+}
+
+.footer-avatar-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 -5px 15px rgba(88, 28, 135, 0.3)); /* Blends avatar edge with purple mesh */
+}
+
+/* --- COPYRIGHT BOTTOM BASE BAR --- */
+.footer-bottom-bar {
+  width: 100%;
+  height: 45px;
+  background-color: #060911; /* Darker pitch base floor row */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.footer-bottom-bar p {
+  font-family: 'Courier New', Courier, monospace;
+  color: #64748b;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- RESPONSIVENESS VARIATIONS --- */
+@media (max-width: 640px) {
+  .footer-quote {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  .footer-avatar-box {
+    width: 130px;
+  }
+}

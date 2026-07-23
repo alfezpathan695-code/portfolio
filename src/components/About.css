@@ -1,0 +1,129 @@
+.about-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0b0f19; /* Standard deep midnight background matching screenshot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 10%;
+  position: relative;
+}
+
+.about-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+}
+
+/* --- LEFT CONTENT BLOCK --- */
+.about-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.about-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Thin premium layout separator line */
+.heading-line {
+  height: 1px;
+  flex-grow: 1;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(6, 182, 212, 0.4), transparent);
+}
+
+.about-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #cbd5e1; /* Smooth readability text white-grey color */
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.about-text-content strong {
+  color: #06b6d4; /* Accent color popup */
+  font-weight: 600;
+}
+
+/* --- RESUME FLOATING CIRCLE BUTTON --- */
+.resume-download-btn {
+  margin-top: 2.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #6366f1; /* Premium Indigo hue matching screenshot */
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  align-self: flex-start;
+}
+
+.resume-download-btn:hover {
+  transform: translateY(-4px);
+  background: #4f46e5;
+  box-shadow: 0 15px 25px rgba(99, 102, 241, 0.5);
+}
+
+/* --- RIGHT IMAGE CONTAINER --- */
+.about-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-frame {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1; /* Pure professional square block */
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-display-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-frame:hover .profile-display-img {
+  transform: scale(1.03); /* Subtle fluid zoom on profile hover */
+}
+
+/* --- SCREEN RESPONSIVENESS TWEAKS --- */
+@media (max-width: 968px) {
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .about-right {
+    grid-row: 1; /* Image goes on top on small dynamic viewports */
+  }
+  
+  .image-frame {
+    max-width: 320px;
+  }
+}

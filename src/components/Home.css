@@ -1,0 +1,125 @@
+:root {
+  --bg-main: #0b0f19;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --accent-blue: #06b6d4;
+}
+
+.home-container {
+  min-height: 115vh;
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+  background-color: var(--bg-main);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home-content {
+  max-width: 800px;
+}
+
+.code-intro {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.name-title {
+  font-size: 5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--accent-blue), #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.sub-heading {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.tagline {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 650px;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+/* --- ACTION CONTROLS ROW --- */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.talk-btn {
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  padding: 0.8rem 2.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.control-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.3rem;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.gear-btn.active {
+  color: var(--accent-blue);
+}
+
+.sound-box {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  width: 42px;
+  height: 38px;
+  font-size: 1.05rem;
+}
+
+/* --- SLIDING LOGO EXPANSION SYSTEM --- */
+.hidden-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Gear open hote hi side me failne ka animation hook */
+.hidden-controls.reveal {
+  max-width: 200px;
+  opacity: 1;
+  visibility: visible;
+  margin-left: 0.5rem;
+}
+
+.toggle-item {
+  animation: popItem 0.4s ease forwards;
+}
+
+@keyframes popItem {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
