@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Lenis from 'lenis'; // Smooth Scroll library
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
@@ -10,6 +11,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 function App() {
   const [loading, setLoading] = useState(true);
 
+  // 1. Lenis Smooth Scrolling Setup
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,      // kitni smoothly scroll aage slide karega
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Linear inertia curve
+      smoothWheel: true,  // Mouse wheel smoothness
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Unmount cleanup
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // 2. Preloader Timer
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -98,7 +122,8 @@ function App() {
             >
               <Projects />
             </motion.div>
-             <Footer />
+
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>
