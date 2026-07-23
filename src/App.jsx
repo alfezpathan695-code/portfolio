@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Lenis from 'lenis'; // Smooth Scroll library
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
@@ -11,33 +10,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 function App() {
   const [loading, setLoading] = useState(true);
 
-  // 1. Lenis Smooth Scrolling Setup
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,      // kitni smoothly scroll aage slide karega
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Linear inertia curve
-      smoothWheel: true,  // Mouse wheel smoothness
-      touchMultiplier: 1.5,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    // Unmount cleanup
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  // 2. Preloader Timer
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // 3 Second Initializer screen
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,7 +21,6 @@ function App() {
     <div className="App">
       <AnimatePresence mode="wait">
         {loading ? (
-          // Preloader Smooth Overlay fading animation
           <motion.div 
             key="loader"
             initial={{ opacity: 1 }}
@@ -77,7 +52,6 @@ function App() {
             </motion.p>
           </motion.div>
         ) : (
-          // Main Website Structure
           <motion.div 
             key="content"
             initial={{ opacity: 0 }}
@@ -86,44 +60,30 @@ function App() {
           >
             <Navbar />
             
-            {/* Fade In Up Motion Wrapper for Sections */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Home />
-            </motion.div>
+            {/* FULL PAGE SCROLL SNAP CONTAINER */}
+            <div className="scroll-snap-container">
+              
+              <section className="snap-section">
+                <Home />
+              </section>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <About />
-            </motion.div>
+              <section className="snap-section">
+                <About />
+              </section>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Skills />
-            </motion.div>
+              <section className="snap-section">
+                <Skills />
+              </section>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Projects />
-            </motion.div>
+              <section className="snap-section">
+                <Projects />
+              </section>
 
-            <Footer />
+              <section className="snap-section">
+                <Footer />
+              </section>
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

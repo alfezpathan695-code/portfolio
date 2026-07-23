@@ -1,15 +1,24 @@
- html.lenis, html.lenis body {
-  height: auto;
+/* Container ko scroll snapping container banao */
+html, body, #root, .App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+/* Full page snap container */
+.scroll-snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory; /* Vertical snapping activate */
+  scroll-behavior: smooth; /* Smooth slide effect */
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
+/* Har section full screen rahega aur snap hoga */
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start; /* Scroll focus section ke top par freeze hoga */
+  scroll-snap-stop: always; /* Fast scroll me bhi section miss na ho */
+  position: relative;
 }
