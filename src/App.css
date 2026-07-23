@@ -1,24 +1,49 @@
-/* Container ko scroll snapping container banao */
-html, body, #root, .App {
-  height: 100%;
+/* Smooth Scroll without jump */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Navbar ke peeche content chupne se bachane ke liye */
+}
+
+body {
   margin: 0;
   padding: 0;
+  background-color: #0b0f19;
+  color: #ffffff;
   overflow-x: hidden;
 }
 
-/* Full page snap container */
-.scroll-snap-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory; /* Vertical snapping activate */
-  scroll-behavior: smooth; /* Smooth slide effect */
+/* Subtitle and Section Distance (Jisse jump na lage) */
+section, 
+.section-container {
+  padding: 100px 20px;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
 }
 
-/* Har section full screen rahega aur snap hoga */
-.snap-section {
-  height: 100vh;
-  width: 100%;
-  scroll-snap-align: start; /* Scroll focus section ke top par freeze hoga */
-  scroll-snap-stop: always; /* Fast scroll me bhi section miss na ho */
-  position: relative;
+/* Card hover scaling (Sleek interaction) */
+div[class*="card"] {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+}
+
+div[class*="card"]:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px -10px rgba(6, 182, 212, 0.3);
+}
+
+/* Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+  border-radius: 4px;
 }
