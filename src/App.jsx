@@ -8,27 +8,48 @@ import Footer from './components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
+// Shocking Scroll Animation Configuration
+const sectionVariant = {
+  hidden: { 
+    opacity: 0, 
+    y: 80, 
+    scale: 0.9,
+    rotateX: 10 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    rotateX: 0,
+    transition: { 
+      duration: 0.9, 
+      ease: [0.16, 1, 0.3, 1] 
+    }
+  }
+};
+
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ perspective: "1000px" }}>
       <AnimatePresence mode="wait">
         {loading ? (
+          /* Preloader Overlay */
           <motion.div 
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             style={{
-              height: '100vh', width: '100vw', backgroundColor: '#0b0f19',
+              height: '100vh', width: '100vw', backgroundColor: '#030712',
               display: 'flex', flexDirection: 'column', justifyContent: 'center',
               alignItems: 'center', position: 'fixed', zIndex: 9999
             }}
@@ -37,22 +58,23 @@ function App() {
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
               style={{
-                width: '50px', height: '50px',
+                width: '60px', height: '60px',
                 border: '3px solid rgba(6, 182, 212, 0.1)',
                 borderTop: '3px solid #06b6d4', borderRadius: '50%',
-                marginBottom: '1rem'
+                marginBottom: '1.5rem'
               }}
             />
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              style={{ color: '#06b6d4', fontFamily: 'monospace', letterSpacing: '2px', fontSize: '0.9rem' }}
+              transition={{ repeat: Infinity, duration: 1.8 }}
+              style={{ color: '#06b6d4', fontFamily: 'monospace', letterSpacing: '3px', fontSize: '0.85rem' }}
             >
-              INITIALIZING_PORTFOLIO...
+              PORTFOLIO_SYSTEM_LOADING...
             </motion.p>
           </motion.div>
         ) : (
+          /* Main Interactive Sections */
           <motion.div 
             key="content"
             initial={{ opacity: 0 }}
@@ -60,10 +82,48 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <Navbar />
-            <Home />
-            <About />
-            <Skills />
-            <Projects />
+
+            {/* Home Section */}
+            <motion.section 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+              variants={sectionVariant}
+            >
+              <Home />
+            </motion.section>
+
+            {/* About Section */}
+            <motion.section 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+              variants={sectionVariant}
+            >
+              <About />
+            </motion.section>
+
+            {/* Skills Section */}
+            <motion.section 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+              variants={sectionVariant}
+            >
+              <Skills />
+            </motion.section>
+
+            {/* Projects Section */}
+            <motion.section 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+              variants={sectionVariant}
+            >
+              <Projects />
+            </motion.section>
+
+            {/* Footer */}
             <Footer />
           </motion.div>
         )}
