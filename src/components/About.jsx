@@ -32,10 +32,15 @@ export default function About() {
             </p>
           </div>
 
-          {/* Floating Download Resume Button */}
-          <a href="/resume.pdf" download className="resume-download-btn" title="Download Resume">
-            <FontAwesomeIcon icon={faCloudArrowDown} />
-          </a>
+{/* Floating Download Resume Button */}
+<a 
+  href={`${import.meta.env.BASE_URL}resume.pdf`} 
+  download="Alfez_Resume.pdf" 
+  className="resume-download-btn" 
+  title="Download Resume"
+>
+  <FontAwesomeIcon icon={faCloudArrowDown} />
+</a>
         </div>
 
 {/* Right Side: Image Showcase */}
