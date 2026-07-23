@@ -8,22 +8,22 @@ import Footer from './components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
-// Shocking Scroll Animation Configuration
+// Ultra-Smooth Physics Spring Motion Variant
 const sectionVariant = {
   hidden: { 
     opacity: 0, 
-    y: 80, 
-    scale: 0.9,
-    rotateX: 10 
+    y: 60, 
+    scale: 0.94,
+    filter: "blur(8px)" // Smooth entrance ke liye subtle blur
   },
   visible: { 
     opacity: 1, 
     y: 0, 
     scale: 1,
-    rotateX: 0,
+    filter: "blur(0px)",
     transition: { 
-      duration: 0.9, 
-      ease: [0.16, 1, 0.3, 1] 
+      duration: 1.1, 
+      ease: [0.22, 1, 0.36, 1] // Luxury Bezier Curve (Ultra-smooth deceleration)
     }
   }
 };
@@ -39,15 +39,15 @@ function App() {
   }, []);
 
   return (
-    <div className="App" style={{ perspective: "1000px" }}>
+    <div className="App">
       <AnimatePresence mode="wait">
         {loading ? (
           /* Preloader Overlay */
           <motion.div 
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             style={{
               height: '100vh', width: '100vw', backgroundColor: '#030712',
               display: 'flex', flexDirection: 'column', justifyContent: 'center',
@@ -56,7 +56,7 @@ function App() {
           >
             <motion.div 
               animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+              transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
               style={{
                 width: '60px', height: '60px',
                 border: '3px solid rgba(6, 182, 212, 0.1)',
@@ -79,7 +79,7 @@ function App() {
             key="content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
           >
             <Navbar />
 
@@ -87,7 +87,7 @@ function App() {
             <motion.section 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={sectionVariant}
             >
               <Home />
@@ -97,7 +97,7 @@ function App() {
             <motion.section 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={sectionVariant}
             >
               <About />
@@ -107,7 +107,7 @@ function App() {
             <motion.section 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={sectionVariant}
             >
               <Skills />
@@ -117,7 +117,7 @@ function App() {
             <motion.section 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={sectionVariant}
             >
               <Projects />
