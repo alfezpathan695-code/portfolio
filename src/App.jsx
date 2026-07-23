@@ -7,9 +7,14 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const sections = [<Home />, <About />, <Skills />, <Projects />, <Footer />];
+
 function App() {
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
+  // Preloader Timer
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -17,10 +22,38 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Full Page Wheel Scroll Handler
+  useEffect(() => {
+    if (loading) return;
+
+    const handleWheel = (e) => {
+      if (isScrolling) return;
+
+      setIsScrolling(true);
+
+      if (e.deltaY > 0) {
+        // Scroll Down
+        setCurrentIndex((prev) => (prev < sections.length - 1 ? prev + 1 : prev));
+      } else {
+        // Scroll Up
+        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
+      }
+
+      // Cooldown to avoid fast multiple scrolls
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000); // 1 second animation lock
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [loading, isScrolling]);
+
   return (
-    <div className="App">
+    <div className="App" style={{ height: '100vh', overflow: 'hidden', position: 'relative' }}>
       <AnimatePresence mode="wait">
         {loading ? (
+          // Preloader
           <motion.div 
             key="loader"
             initial={{ opacity: 1 }}
@@ -52,39 +85,31 @@ function App() {
             </motion.p>
           </motion.div>
         ) : (
-          <motion.div 
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
+          // Main Website Full-Screen Slider
+          <div style={{ height: '100vh', width: '100vw', position: 'relative' }}>
             <Navbar />
-            
-            {/* FULL PAGE SCROLL SNAP CONTAINER */}
-            <div className="scroll-snap-container">
-              
-              <section className="snap-section">
-                <Home />
-              </section>
 
-              <section className="snap-section">
-                <About />
-              </section>
-
-              <section className="snap-section">
-                <Skills />
-              </section>
-
-              <section className="snap-section">
-                <Projects />
-              </section>
-
-              <section className="snap-section">
-                <Footer />
-              </section>
-
+            <div style={{ height: '100vh', width: '100vw', overflow: 'hidden', position: 'relative' }}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -100 }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    height: 'calc(100vh - 70px)', // Navbar height minus karke
+                    width: '100%',
+                    position: 'absolute',
+                    top: '70px',
+                    overflowY: 'auto'
+                  }}
+                >
+                  {sections[currentIndex]}
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>
